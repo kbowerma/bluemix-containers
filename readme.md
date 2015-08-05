@@ -42,7 +42,7 @@ Option 2) Leverage the docker CLI directly. In this shell, override local docker
 	docker images
 
 ```
-## Configuration
+## Attempts to build a deploy a custom mongo container to Bluemix
 
 6. Build a mongo image from a local docker file:  
    ```docker build -t ktb_mongo .```
