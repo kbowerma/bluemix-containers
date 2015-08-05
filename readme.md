@@ -1,17 +1,33 @@
-#add mongo service
-```cf create-service mongodb 100 mongodb01-kyle```
+
 
 
 ### 8.4.2014 docker containers
 
+## Bluemix UI steps
+
+
+1. Login and goto your dashboard
+![](img/dashboard.png?raw=true)
+2. Select Containers
+![](img/containerPage.png?raw=true)
+3. Before you can create a container you must create a namespace for your org
+![](img/namespace.png?raw=true)
+4. The next screen shows you the steps to upload an image and create a container.
+![](img/NewContainersteps.png?raw=true)
+5. Run cf ic login
+![](img/cf_ic_login.png?raw=true)
+
+
+
 ## Installation Setup
 
-1.  upgarde docker to 1.6 from my version 1.5.0  ```boot2docker upgrade``` now brings me to version 1.7.1
+1.  upgrade docker to 1.6 from my version 1.5.0  ```boot2docker upgrade``` now brings me to version 1.7.1
 2. upgrade cf
 >cf version 6.10.0-b78bf10-2015-02-11T22:25:45+00:00
 3. Went to [github](https://github.com/cloudfoundry/cli/releases) and just grabed the binaries
 4. Install the container pluging ```cf install-plugin https://static-ice.ng.bluemix.net/ibm-containers-mac```  you should now see the ic pluggin from ```cf help``` under the ***INSTALLED PLUGIN COMMANDS***  section
 5.  ```cf ic login``` now shows my new private bluemix namespace
+
 ```
 ** Authenticating with registry at registry.ng.bluemix.net
 Successfully authenticated with registry
@@ -44,8 +60,7 @@ Option 2) Leverage the docker CLI directly. In this shell, override local docker
 ```
 ## Attempts to build a deploy a custom mongo container to Bluemix
 
-6. Build a mongo image from a local docker file:  
-   ```docker build -t ktb_mongo .```
+6. Build a mongo image from a local docker file:  ```docker build -t ktb_mongo .```
 7. Tag the image with your private namespace in the IBM Containers registry.
    ```docker tag ktb_mongo  registry.ng.bluemix.net/bowerman/ktb_mongo:v0.1``` this command basicly clones the image but to a different repo and adds a version via the tag appended to the image name.
 8. Now we need to push this image to the IBM Containers registry: ```docker push  registry.ng.bluemix.net/bowerman/ktb_mongo:v0.1 ```  I had to run cf ic login first. but then it worked.
@@ -71,3 +86,8 @@ I ran ```  cf ic run --name ktb_mongo registry.ng.bluemix.net/bowerman/ktb_mongo
 
  -tried with ports:
   -- ``` cf ic run -d -p 27017:21017 -p 28017:28017 --name ktb_mongoV0.2.2  registry.ng.bluemix.net/bowerman/ktb_mongo:v0.2``` ***CRASHED***
+
+  #### 4.10.2015
+  ----
+  ######add mongo service
+  ```cf create-service mongodb 100 mongodb01-kyle```
